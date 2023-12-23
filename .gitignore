@@ -1,0 +1,5 @@
+*.mp3
+*.pkl
+*.egg-info
+__pycache__
+*.srt
