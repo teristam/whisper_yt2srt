@@ -5,7 +5,7 @@ Clone this repository, create a virtual environment and then
 
 `pip install .`
 
-Note: if you want to use GPU for interference, follow the official [PyTorch](https://pytorch.org/get-started/locally/) installation to get GPU working
+Note: if you want to use GPU for inference, follow the official [PyTorch](https://pytorch.org/get-started/locally/) installation to get GPU working.
 
 ### Usage
 ```
