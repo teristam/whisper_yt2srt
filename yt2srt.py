@@ -7,7 +7,6 @@ import torch
 import click
 import pickle 
 
-# %%
 
 def format_time(timestamp):
     # convert the timestamp from second to the timestamp in SRT
@@ -19,7 +18,6 @@ def format_time(timestamp):
     else:
         return None
 
-#%%
 def format_chunk(one_chunk):
     # convert each chunk to SRT format
     start_time = format_time(one_chunk['timestamp'][0])
@@ -31,16 +29,16 @@ def format_chunk(one_chunk):
         end_time = format_time(one_chunk['timestamp'][0]+5)
     return f'{start_time} --> {end_time} \n {one_chunk["text"]}\n\n'
 
-# %%
-# write the timestamp to SRT file
 def write_srt(res, out_filename='res.srt'):
+    # write the timestamp to SRT file
     with open(out_filename, 'w', encoding="utf-8") as f:
         for i, chunk in enumerate(res['chunks']):
             str = format_chunk(chunk)
             f.write(f'{i}\n')
             f.write(str)
-# %%
+
 def init_pipeline():
+    # initiate model
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
     MODEL_NAME = "openai/whisper-large-v3" #this always needs to stay in line 8 :D sorry for the hackiness
