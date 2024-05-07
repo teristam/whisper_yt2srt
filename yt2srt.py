@@ -47,7 +47,7 @@ def init_pipeline():
     # initiate model
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
-    MODEL_NAME = "openai/whisper-large-v3" #this always needs to stay in line 8 :D sorry for the hackiness
+    MODEL_NAME = "openai/whisper-large-v3"
 
     model = AutoModelForSpeechSeq2Seq.from_pretrained(MODEL_NAME, torch_dtype=torch_dtype, low_cpu_mem_usage=True, use_safetensors=True)
 
