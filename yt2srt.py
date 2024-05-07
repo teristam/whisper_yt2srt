@@ -36,6 +36,12 @@ def write_srt(res, out_filename='res.srt'):
             str = format_chunk(chunk)
             f.write(f'{i}\n')
             f.write(str)
+            
+def write_file(res, out_filename='res.txt'):
+    with open(out_filename, 'w', encoding="utf-8") as f:
+        for i, chunk in enumerate(res['chunks']):
+            f.write(chunk["text"]+'\n')
+            
 
 def init_pipeline():
     # initiate model
@@ -65,23 +71,33 @@ def init_pipeline():
     return pipe
 
 @click.command()
-@click.argument('yt_url')
-@click.option('--output_filename', '-o', default='output.srt', help='filename of the output SRT file. Default to output.srt')
-def main(yt_url, output_filename):
-    print(output_filename)
-    print("Start downloading youtube files")
-    yt = pt.YouTube(yt_url)
-    stream = yt.streams.filter(only_audio=True)[0]
-    stream.download(filename="audio.mp3")
-    print('Audio downloaded')
-
+@click.argument('source')
+@click.option('--output_type', '-t', default='text', help='Output format. text or srt, default text')
+@click.option('--output_filename', '-o', default='output.txt', help='filename of the output SRT file. Default to output.srt')
+def main(source:str, output_filename, output_type):
     pipe = init_pipeline()
+
+    if source.startswith('http'):
+        print(output_filename)
+        print("Start downloading youtube files")
+        yt = pt.YouTube(source)
+        stream = yt.streams.filter(only_audio=True)[0]
+        stream.download(filename="audio.mp3")
+        print('Audio downloaded')
+        res = pipe("audio.mp3")
+    else:
+        res = pipe(source)
+        
+
     print('I will now convert the audio to text')
-    res = pipe("audio.mp3")
     
     with open('res.pkl','wb') as f:
         pickle.dump(res, f)
+        
+    if output_type == 'text':
+        write_file(res, output_filename)
+    else:
+        write_srt(res, output_filename)
     
-    write_srt(res, output_filename)
-    print(f'Success! Subtitles written to {output_filename}')    
+    print(f'Success! Result written to {output_filename}')    
 
