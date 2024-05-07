@@ -1,6 +1,6 @@
 A tool to use the [Whisper v3](https://huggingface.co/openai/whisper-large-v3) model from OpenAI to convert audio in a Youtube video to text and export it as a SRT subtitle file. You can then use the SRT file with tools like [asbplayer](https://github.com/killergerbah/asbplayer) for sentence mining. All transcription is done locally.
 
-It also support transcribing audio file locally and export to a plain text file.
+It also support transcribing audio file locally and exporting to a plain text file.
 
 Note: the youtube downloader may not work. You can download the audio file through other means and provide it to the tool.
 
