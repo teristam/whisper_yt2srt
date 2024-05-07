@@ -2,6 +2,8 @@ A tool to use the [Whisper v3](https://huggingface.co/openai/whisper-large-v3) m
 
 It also support transcribing audio file locally.
 
+Note: the youtube downloader may not work. You can download the audio file through other means and provide it to the tool.
+
 ### Installation
 Clone this repository, create a virtual environment and then 
 
@@ -12,6 +14,8 @@ Note: if you want to use GPU for inference, follow the official [PyTorch](https:
 ### Usage
 ```
 Usage: yt2srt [OPTIONS] SOURCE
+
+SOURCE: name of audio file or youtube URL
 
 Options:
   -t, --output_type TEXT      Output format. text or srt, default text
