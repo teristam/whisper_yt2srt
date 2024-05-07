@@ -20,6 +20,6 @@ SOURCE: name of audio file or youtube URL
 Options:
   -t, --output_type TEXT      Output format. text or srt, default text
   -o, --output_filename TEXT  filename of the output file. Default to
-                              output.text
+                              output.txt
   --help                      Show this message and exit.
 ```
